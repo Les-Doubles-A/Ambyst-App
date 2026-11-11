@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 use std::path::PathBuf;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -9,30 +10,35 @@ pub enum Kind {
     Portable,
 }
 
+/// What Ambyst-App itself installed (used when Windows has no record of the app).
 #[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct Entry {
-    /// "owner/name"
-    pub repo: String,
-    #[serde(default)]
-    pub installed_tag: Option<String>,
-    #[serde(default)]
-    pub kind: Option<Kind>,
+pub struct Install {
+    pub tag: String,
+    pub kind: Kind,
     #[serde(default)]
     pub exe_path: Option<PathBuf>,
 }
 
-impl Entry {
-    pub fn new(repo: String) -> Self {
-        Self { repo, installed_tag: None, kind: None, exe_path: None }
-    }
+#[derive(Default, Serialize, Deserialize)]
+pub struct Data {
+    /// Repositories added by hand, in addition to the catalog ("owner/name").
+    #[serde(default)]
+    pub extra_repos: Vec<String>,
+    /// Keyed by lowercase "owner/name".
+    #[serde(default)]
+    pub installs: BTreeMap<String, Install>,
+}
 
-    pub fn name(&self) -> &str {
-        self.repo.rsplit('/').next().unwrap_or(&self.repo)
-    }
-
-    pub fn key(&self) -> String {
-        self.repo.to_lowercase()
-    }
+/// Format written by version 1.0.0.
+#[derive(Deserialize)]
+struct OldEntry {
+    repo: String,
+    #[serde(default)]
+    installed_tag: Option<String>,
+    #[serde(default)]
+    kind: Option<Kind>,
+    #[serde(default)]
+    exe_path: Option<PathBuf>,
 }
 
 pub fn data_dir() -> PathBuf {
@@ -49,19 +55,33 @@ fn store_path() -> PathBuf {
     data_dir().join("apps.json")
 }
 
-pub fn load() -> Vec<Entry> {
-    std::fs::read_to_string(store_path())
-        .ok()
-        .and_then(|s| serde_json::from_str(s.trim_start_matches('\u{feff}')).ok())
-        .unwrap_or_default()
+pub fn load() -> Data {
+    let Ok(raw) = std::fs::read_to_string(store_path()) else {
+        return Data::default();
+    };
+    let raw = raw.trim_start_matches('\u{feff}');
+    if let Ok(d) = serde_json::from_str::<Data>(raw) {
+        return d;
+    }
+    let mut data = Data::default();
+    if let Ok(old) = serde_json::from_str::<Vec<OldEntry>>(raw) {
+        for e in old {
+            if !e.repo.to_lowercase().starts_with(&format!("{}/", crate::github::OWNER.to_lowercase())) {
+                data.extra_repos.push(e.repo.clone());
+            }
+            if let (Some(tag), Some(kind)) = (e.installed_tag, e.kind) {
+                data.installs
+                    .insert(e.repo.to_lowercase(), Install { tag, kind, exe_path: e.exe_path });
+            }
+        }
+    }
+    data
 }
 
-pub fn save(entries: &[Entry]) {
+pub fn save(data: &Data) {
     let path = store_path();
-    if let Some(dir) = path.parent() {
-        let _ = std::fs::create_dir_all(dir);
-    }
-    if let Ok(json) = serde_json::to_string_pretty(entries) {
+    let _ = std::fs::create_dir_all(data_dir());
+    if let Ok(json) = serde_json::to_string_pretty(data) {
         let tmp = path.with_extension("json.tmp");
         if std::fs::write(&tmp, json).is_ok() {
             let _ = std::fs::rename(&tmp, &path);
