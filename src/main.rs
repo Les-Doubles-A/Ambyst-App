@@ -7,7 +7,7 @@ mod store;
 
 use eframe::egui::{self, Align, Align2, Color32, CornerRadius, FontId, Layout, Margin, RichText, Stroke, Vec2};
 use github::{Release, Repo};
-use std::collections::VecDeque;
+use std::collections::{HashMap, VecDeque};
 use std::path::PathBuf;
 use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::{Arc, Mutex};
@@ -41,8 +41,23 @@ const TILE_COLORS: [Color32; 6] = [
 
 // ---------------------------------------------------------------- model
 
+/// A repository to list. `release` and `images` are known when it comes from the
+/// published catalog; otherwise they are fetched from the API afterwards.
+struct Entry {
+    repo: Repo,
+    extra: bool,
+    release: Option<Option<Release>>,
+    images: Option<Vec<String>>,
+}
+
+impl Entry {
+    fn bare(repo: Repo, extra: bool) -> Self {
+        Self { repo, extra, release: None, images: None }
+    }
+}
+
 enum Msg {
-    Catalog(Result<Vec<(Repo, bool)>, String>),
+    Catalog(Result<Vec<Entry>, String>),
     Release(String, Result<Option<Release>, String>),
     Icon(String, Vec<u8>),
     Progress(String, f32),
@@ -162,10 +177,23 @@ impl App {
         let extras = self.data.extra_repos.clone();
         let (tx, ctx) = (self.tx.clone(), self.ctx.clone());
         std::thread::spawn(move || {
-            let res = github::list_repos(github::OWNER).map(|repos| {
-                let mut out: Vec<(Repo, bool)> = repos.into_iter().map(|r| (r, false)).collect();
+            // The published catalog costs one download; the API is the fallback.
+            let listed = match github::catalog() {
+                Ok(list) => Ok(list
+                    .into_iter()
+                    .map(|c| Entry {
+                        repo: c.repo,
+                        extra: false,
+                        release: Some(c.release),
+                        images: Some(c.images),
+                    })
+                    .collect::<Vec<_>>()),
+                Err(_) => github::list_repos(github::OWNER)
+                    .map(|repos| repos.into_iter().map(|r| Entry::bare(r, false)).collect()),
+            };
+            let res = listed.map(|mut out| {
                 for extra in extras {
-                    if out.iter().any(|(r, _)| r.full_name.eq_ignore_ascii_case(&extra)) {
+                    if out.iter().any(|e| e.repo.full_name.eq_ignore_ascii_case(&extra)) {
                         continue;
                     }
                     let repo = github::repo_info(&extra).unwrap_or_else(|_| Repo {
@@ -175,7 +203,7 @@ impl App {
                         default_branch: "HEAD".into(),
                         pushed_at: String::new(),
                     });
-                    out.push((repo, true));
+                    out.push(Entry::bare(repo, true));
                 }
                 out
             });
@@ -185,18 +213,26 @@ impl App {
         });
     }
 
-    fn on_catalog(&mut self, repos: Vec<(Repo, bool)>) {
+    fn on_catalog(&mut self, entries: Vec<Entry>) {
         let mut old: Vec<Item> = std::mem::take(&mut self.items);
-        for (repo, extra) in repos {
+        let mut images: HashMap<String, Vec<String>> = HashMap::new();
+        for Entry { repo, extra, release, images: imgs } in entries {
             let key = repo.full_name.to_lowercase();
             let prev = old.iter().position(|i| i.key() == key).map(|p| old.swap_remove(p));
             let icon = prev.as_ref().and_then(|p| p.icon.clone()).or_else(|| {
                 icons::cached(&repo.full_name).map(|rgba| self.texture(&key, &rgba))
             });
+            if let Some(list) = imgs {
+                images.insert(key, list);
+            }
+            let known = release.is_some();
             self.items.push(Item {
-                release: prev.as_ref().and_then(|p| p.release.clone()),
+                release: match release {
+                    Some(r) => Some(Ok(r)),
+                    None => prev.as_ref().and_then(|p| p.release.clone()),
+                },
                 installed: prev.as_ref().and_then(|p| p.installed.clone()),
-                busy: Some(Busy::Checking),
+                busy: (!known).then_some(Busy::Checking),
                 error: None,
                 icon,
                 repo,
@@ -208,11 +244,13 @@ impl App {
 
         let mut jobs: VecDeque<Job> = VecDeque::new();
         for item in &self.items {
-            jobs.push_back(Job::Release(item.repo.full_name.clone()));
+            if matches!(item.busy, Some(Busy::Checking)) {
+                jobs.push_back(Job::Release(item.repo.full_name.clone()));
+            }
         }
         for item in &self.items {
             if item.icon.is_none() && !icons::recently_missing(&item.repo) {
-                jobs.push_back(Job::Icon(item.repo.clone()));
+                jobs.push_back(Job::Icon(item.repo.clone(), images.remove(&item.key())));
             }
         }
         run_jobs(jobs, self.tx.clone(), self.ctx.clone());
@@ -453,7 +491,8 @@ impl App {
 
 enum Job {
     Release(String),
-    Icon(Repo),
+    /// The image list comes from the catalog; `None` means read the tree from the API.
+    Icon(Repo, Option<Vec<String>>),
 }
 
 fn run_jobs(jobs: VecDeque<Job>, tx: Sender<Msg>, ctx: egui::Context) {
@@ -468,8 +507,8 @@ fn run_jobs(jobs: VecDeque<Job>, tx: Sender<Msg>, ctx: egui::Context) {
                     let res = github::latest_release(&full);
                     let _ = tx.send(Msg::Release(full.to_lowercase(), res));
                 }
-                Job::Icon(repo) => {
-                    if let Some(rgba) = icons::fetch(&repo) {
+                Job::Icon(repo, images) => {
+                    if let Some(rgba) = icons::fetch(&repo, images.as_deref()) {
                         let _ = tx.send(Msg::Icon(repo.full_name.to_lowercase(), rgba));
                     }
                 }

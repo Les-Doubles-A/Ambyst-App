@@ -34,8 +34,10 @@ pub fn recently_missing(repo: &Repo) -> bool {
 }
 
 /// Looks for an icon in the usual places of a repository, then anywhere in its
-/// file tree. Returns RGBA SIZE x SIZE.
-pub fn fetch(repo: &Repo) -> Option<Vec<u8>> {
+/// file tree. `images` is the list of image files given by the catalog; without
+/// it, the usual places are probed blindly and the tree is read from the API.
+/// Returns RGBA SIZE x SIZE.
+pub fn fetch(repo: &Repo, images: Option<&[String]>) -> Option<Vec<u8>> {
     let (full_name, name, branch) = (&repo.full_name, &repo.name, &repo.default_branch);
     let lower = name.to_lowercase();
     let candidates = [
@@ -62,13 +64,20 @@ pub fn fetch(repo: &Repo) -> Option<Vec<u8>> {
     ];
     let mut tried: Vec<String> = Vec::new();
     for path in candidates {
+        if images.is_some_and(|list| !list.contains(&path)) {
+            continue;
+        }
         if let Some(rgba) = download(full_name, branch, &path) {
             return Some(save(full_name, rgba));
         }
         tried.push(path);
     }
     // Not at a usual place: rank every image of the repository.
-    if let Ok(files) = crate::github::repo_files(full_name, branch) {
+    let files = match images {
+        Some(list) => Ok(list.to_vec()),
+        None => crate::github::repo_files(full_name, branch),
+    };
+    if let Ok(files) = files {
         let mut ranked: Vec<(i32, String)> = files
             .into_iter()
             .filter(|p| !tried.contains(p))

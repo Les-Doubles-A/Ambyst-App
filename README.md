@@ -31,7 +31,15 @@ Ambyst-App cherche l'icône dans le dépôt (`ambyst-icon.png` en priorité, pui
 
 ## Limite GitHub
 
-Les réponses de l'API sont mises en cache (ETag) : après le premier lancement, les vérifications ne consomment presque plus de quota. Si `GITHUB_TOKEN` est défini, ou si le GitHub CLI (`gh`) est connecté, son jeton est utilisé.
+Sans jeton, l'API GitHub n'autorise que 60 requêtes par heure et par adresse IP, moins que ce qu'il faut pour vérifier toutes les apps. Ambyst-App lit donc la liste des apps, leurs releases et leurs images dans un seul fichier, `catalog.json` (branche `catalog`), téléchargé depuis raw.githubusercontent.com, qui n'est pas soumis à cette limite.
+
+Ce catalogue est régénéré par la GitHub Action `.github/workflows/catalog.yml` toutes les heures et à chaque push sur `main`. Après une release, on peut le mettre à jour tout de suite :
+
+```
+gh workflow run catalog.yml -R Les-Doubles-A/Ambyst-App
+```
+
+Si le catalogue est inaccessible, Ambyst-App revient à l'API (avec `GITHUB_TOKEN` ou le jeton du GitHub CLI `gh` s'il est connecté). Les dépôts ajoutés à la main passent toujours par l'API.
 
 ## Installation
 

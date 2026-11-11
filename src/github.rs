@@ -1,13 +1,17 @@
-//! GitHub API access with an on-disk ETag cache.
+//! GitHub access with an on-disk ETag cache.
 //!
-//! Conditional requests answered with 304 do not count against the GitHub rate
-//! limit, so after the first launch, checking the whole catalog is nearly free.
+//! The app list comes from `catalog.json`, published by a GitHub Action of this
+//! repository on raw.githubusercontent.com: a single download per launch, not
+//! counted against the GitHub API rate limit (60 requests per hour without a
+//! token). The API is only used as a fallback and for repositories added by hand.
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
 
 pub const OWNER: &str = "Les-Doubles-A";
+const CATALOG_URL: &str =
+    "https://raw.githubusercontent.com/Les-Doubles-A/Ambyst-App/catalog/catalog.json";
 
 #[derive(Clone, Debug)]
 pub struct Repo {
@@ -256,6 +260,61 @@ pub fn repo_files(full_name: &str, branch: &str) -> Result<Vec<String>, String> 
     Ok(tree.tree.into_iter().filter(|e| e.kind == "blob").map(|e| e.path).collect())
 }
 
+#[derive(Deserialize)]
+struct ApiCatalog {
+    repos: Vec<ApiCatalogRepo>,
+}
+
+#[derive(Deserialize)]
+struct ApiCatalogRepo {
+    full_name: String,
+    name: String,
+    #[serde(default)]
+    description: String,
+    default_branch: String,
+    #[serde(default)]
+    pushed_at: String,
+    release: Option<ApiRelease>,
+    #[serde(default)]
+    images: Vec<String>,
+}
+
+/// One repository of the published catalog, with its latest release (`None` if it
+/// has none) and the paths of its image files.
+pub struct CatalogEntry {
+    pub repo: Repo,
+    pub release: Option<Release>,
+    pub images: Vec<String>,
+}
+
+/// Every app of OWNER in one download, outside the API rate limit.
+pub fn catalog() -> Result<Vec<CatalogEntry>, String> {
+    let Fetch::Body(body) = api_get(CATALOG_URL)? else {
+        return Err("Catalogue introuvable".into());
+    };
+    parse_catalog(&body)
+}
+
+fn parse_catalog(body: &str) -> Result<Vec<CatalogEntry>, String> {
+    let cat: ApiCatalog =
+        serde_json::from_str(body).map_err(|_| "Catalogue illisible".to_string())?;
+    Ok(cat
+        .repos
+        .into_iter()
+        .map(|r| CatalogEntry {
+            repo: Repo {
+                full_name: r.full_name,
+                name: r.name,
+                description: r.description,
+                default_branch: r.default_branch,
+                pushed_at: r.pushed_at,
+            },
+            release: r.release.map(to_release),
+            images: r.images,
+        })
+        .collect())
+}
+
 /// `Ok(None)` when the repository has no published release.
 pub fn latest_release(full_name: &str) -> Result<Option<Release>, String> {
     let url = format!("https://api.github.com/repos/{full_name}/releases/latest");
@@ -264,7 +323,10 @@ pub fn latest_release(full_name: &str) -> Result<Option<Release>, String> {
     };
     let rel: ApiRelease =
         serde_json::from_str(&body).map_err(|_| "Réponse GitHub illisible".to_string())?;
+    Ok(Some(to_release(rel)))
+}
 
+fn to_release(rel: ApiRelease) -> Release {
     let pick = |score: fn(&str) -> Option<u8>| {
         rel.assets
             .iter()
@@ -276,12 +338,12 @@ pub fn latest_release(full_name: &str) -> Result<Option<Release>, String> {
                 size: a.size,
             })
     };
-    Ok(Some(Release {
+    Release {
         tag: rel.tag_name.clone(),
         page: rel.html_url.clone(),
         windows: pick(windows_score),
         android: pick(|n| n.to_lowercase().ends_with(".apk").then_some(1)),
-    }))
+    }
 }
 
 /// Higher is better. None = not usable on Windows x64.
@@ -373,6 +435,26 @@ mod tests {
         assert_eq!(windows_score("app-macos.zip"), None);
         assert_eq!(windows_score("app_arm64-setup.exe"), None);
         assert_eq!(windows_score("checksums.txt"), None);
+    }
+
+    #[test]
+    fn catalog_format() {
+        // Same shape as the output of tools/build_catalog.py.
+        let body = r#"{"repos": [
+            {"default_branch": "main", "description": "", "full_name": "o/a", "images": ["icons/icon128.png"],
+             "name": "a", "pushed_at": "2026-11-11T10:00:00Z",
+             "release": {"assets": [{"browser_download_url": "https://x/a-Setup-1.0.1.exe", "name": "a-Setup-1.0.1.exe", "size": 3}],
+                         "html_url": "https://x", "tag_name": "v1.0.1"}},
+            {"default_branch": "main", "description": "lib", "full_name": "o/b", "images": [],
+             "name": "b", "pushed_at": "", "release": null}
+        ], "version": 1}"#;
+        let list = parse_catalog(body).unwrap();
+        assert_eq!(list.len(), 2);
+        let rel = list[0].release.as_ref().unwrap();
+        assert_eq!(rel.tag, "v1.0.1");
+        assert_eq!(rel.windows.as_ref().unwrap().name, "a-Setup-1.0.1.exe");
+        assert_eq!(list[0].images, ["icons/icon128.png"]);
+        assert!(list[1].release.is_none());
     }
 
     #[test]

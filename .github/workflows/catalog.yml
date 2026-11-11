@@ -1,0 +1,50 @@
+# Publishes catalog.json on the "catalog" branch. Ambyst-App downloads it from
+# raw.githubusercontent.com, which is not subject to the GitHub API rate limit.
+# Run it by hand after a release: gh workflow run catalog.yml -R Les-Doubles-A/Ambyst-App
+name: Catalogue
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate catalog.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/build_catalog.py "${{ github.repository_owner }}" "$RUNNER_TEMP/catalog.json"
+
+      - name: Publish on the catalog branch if it changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git fetch --depth 1 origin catalog 2>/dev/null \
+             && git show FETCH_HEAD:catalog.json > "$RUNNER_TEMP/old.json" 2>/dev/null \
+             && cmp -s "$RUNNER_TEMP/old.json" "$RUNNER_TEMP/catalog.json"; then
+            echo "Catalogue inchange"
+            exit 0
+          fi
+          dir="$(mktemp -d)"
+          cp "$RUNNER_TEMP/catalog.json" "$dir/"
+          cd "$dir"
+          git init -q -b catalog
+          git add catalog.json
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "Catalogue des apps"
+          git push -f -q "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" catalog
+          echo "Catalogue publie"
