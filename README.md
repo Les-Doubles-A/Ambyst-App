@@ -22,7 +22,7 @@ Les apps Android (APK seul) sont listées avec un lien vers leur release.
 | --- | --- |
 | `*setup*.exe`, `*install*.exe` | lance l'installeur |
 | `.msi` | installe via `msiexec` |
-| `.zip` | extrait dans `%LOCALAPPDATA%\Ambyst-Apppps\<app>` |
+| `.zip` | extrait dans `%LOCALAPPDATA%\Ambyst-App\apps\<app>` |
 | autre `.exe` | copié comme app portable |
 
 ## Icônes
