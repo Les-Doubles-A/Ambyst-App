@@ -258,10 +258,11 @@ pub fn latest_release(full_name: &str) -> Result<Option<Release>, String> {
 /// Higher is better. None = not usable on Windows x64.
 fn windows_score(name: &str) -> Option<u8> {
     let n = name.to_lowercase();
+    // Compare whole words, so that "kiosque" is not mistaken for "ios".
     let foreign = [
-        "linux", "macos", "darwin", "-mac", "_mac", "osx", "aarch64", "arm64", "android", "ios",
+        "linux", "macos", "darwin", "mac", "osx", "aarch64", "arm64", "android", "ios",
     ];
-    if foreign.iter().any(|f| n.contains(f)) {
+    if n.split(|c: char| !c.is_ascii_alphanumeric()).any(|w| foreign.contains(&w)) {
         return None;
     }
     let windowsish = n.contains("win") || n.contains("x64") || n.contains("x86_64");
@@ -339,6 +340,9 @@ mod tests {
         assert!(windows_score("app.msi") > windows_score("app-win64.zip"));
         assert_eq!(windows_score("app-linux.zip"), None);
         assert_eq!(windows_score("app.apk"), None);
+        assert_eq!(windows_score("kiosque-Setup-1.0.0.exe"), Some(6));
+        assert_eq!(windows_score("app-macos.zip"), None);
+        assert_eq!(windows_score("app_arm64-setup.exe"), None);
         assert_eq!(windows_score("checksums.txt"), None);
     }
 

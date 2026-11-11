@@ -1,7 +1,7 @@
 ; Ambyst-App installer (Inno Setup 6). Build: iscc installer\ambyst-app.iss
 #define AppName "Ambyst-App"
 #ifndef AppVersion
-  #define AppVersion "1.1.0"
+  #define AppVersion "1.2.0"
 #endif
 
 [Setup]

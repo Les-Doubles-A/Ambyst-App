@@ -16,6 +16,10 @@ use store::Kind;
 const ICON_RGBA: &[u8] = include_bytes!("../assets/icon-128.rgba");
 const SELF_REPO: &str = "Les-Doubles-A/Ambyst-App";
 
+const GAP: f32 = 12.0;
+const PAD: f32 = 16.0;
+const CARD_H: f32 = 210.0;
+
 const ACCENT: Color32 = Color32::from_rgb(109, 79, 208);
 const BG: Color32 = Color32::from_rgb(246, 246, 247);
 const CARD: Color32 = Color32::WHITE;
@@ -571,11 +575,19 @@ impl eframe::App for App {
                 }
 
                 egui::ScrollArea::vertical().auto_shrink(false).show(ui, |ui| {
-                    for idx in visible {
-                        if idx < self.items.len() {
-                            self.row(ui, idx);
-                            ui.add_space(8.0);
-                        }
+                    let width = ui.available_width() - 2.0;
+                    let cols = if width >= 900.0 { 3 } else if width >= 560.0 { 2 } else { 1 };
+                    let card_w = (width - GAP * (cols - 1) as f32) / cols as f32;
+                    for chunk in visible.chunks(cols) {
+                        ui.horizontal_top(|ui| {
+                            ui.spacing_mut().item_spacing.x = GAP;
+                            for &idx in chunk {
+                                if idx < self.items.len() {
+                                    self.card(ui, idx, card_w);
+                                }
+                            }
+                        });
+                        ui.add_space(GAP);
                     }
                 });
             });
@@ -614,39 +626,54 @@ impl App {
         });
     }
 
-    fn row(&mut self, ui: &mut egui::Ui, idx: usize) {
+    fn card(&mut self, ui: &mut egui::Ui, idx: usize, width: f32) {
         let key = self.items[idx].key();
         let mut action: Option<&'static str> = None;
+        let inner = Vec2::new(width - 2.0 * PAD - 2.0, CARD_H - 2.0 * PAD - 2.0);
 
         egui::Frame::new()
             .fill(CARD)
             .stroke(Stroke::new(1.0, BORDER))
-            .corner_radius(CornerRadius::same(8))
-            .inner_margin(Margin::symmetric(14, 12))
+            .corner_radius(CornerRadius::same(10))
+            .inner_margin(Margin::same(PAD as i8))
             .show(ui, |ui| {
-                ui.set_width(ui.available_width());
+                ui.set_min_size(inner);
+                ui.set_max_size(inner);
                 let item = &self.items[idx];
-                ui.horizontal(|ui| {
-                    app_icon(ui, item);
-                    ui.add_space(4.0);
-
-                    let left_w = (ui.available_width() - 300.0).max(140.0);
-                    ui.allocate_ui_with_layout(Vec2::new(left_w, 0.0), Layout::top_down(Align::Min), |ui| {
-                        ui.set_width(left_w);
-                        ui.add(egui::Label::new(RichText::new(&item.repo.name).size(15.5).color(TEXT)).truncate());
-                        let desc = item.repo.description.lines().next().unwrap_or("").trim();
-                        if !desc.is_empty() {
-                            ui.add(egui::Label::new(RichText::new(desc).size(12.5).color(MUTED)).truncate());
-                        }
-                        let (text, color) = status_line(item);
-                        ui.label(RichText::new(text).size(12.5).color(color));
-                        if let Some(err) = &item.error {
-                            ui.add(egui::Label::new(RichText::new(err).size(12.5).color(ERR)).truncate());
-                        }
+                ui.vertical(|ui| {
+                    ui.horizontal(|ui| {
+                        app_icon(ui, item, 56.0);
+                        ui.add_space(4.0);
+                        ui.vertical(|ui| {
+                            ui.add_space(6.0);
+                            ui.add(egui::Label::new(RichText::new(&item.repo.name).size(17.0).color(TEXT)).truncate());
+                            let (text, color) = status_line(item);
+                            ui.add(egui::Label::new(RichText::new(text).size(12.5).color(color)).truncate());
+                        });
                     });
+                    ui.add_space(10.0);
 
-                    ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
-                        action = row_buttons(ui, item, self.confirm_uninstall.as_deref() == Some(key.as_str()));
+                    let desc = item.repo.description.split_whitespace().collect::<Vec<_>>().join(" ");
+                    let mut job = egui::text::LayoutJob::simple(desc, FontId::proportional(13.0), MUTED, inner.x);
+                    job.wrap.max_rows = 2;
+                    job.wrap.break_anywhere = false;
+                    job.wrap.overflow_character = Some('…');
+                    let (rect, _) = ui.allocate_exact_size(Vec2::new(inner.x, 36.0), egui::Sense::hover());
+                    let galley = ui.painter().layout_job(job);
+                    ui.painter().galley(rect.min, galley, MUTED);
+
+                    if let Some(err) = &item.error {
+                        ui.add(egui::Label::new(RichText::new(err).size(12.5).color(ERR)).truncate());
+                    }
+
+                    ui.with_layout(Layout::bottom_up(Align::Max), |ui| {
+                        ui.allocate_ui_with_layout(
+                            Vec2::new(inner.x, 34.0),
+                            Layout::right_to_left(Align::Center),
+                            |ui| {
+                                action = row_buttons(ui, item, self.confirm_uninstall.as_deref() == Some(key.as_str()));
+                            },
+                        );
                     });
                 });
             });
@@ -773,17 +800,17 @@ fn vlabel(v: &str) -> String {
     }
 }
 
-fn app_icon(ui: &mut egui::Ui, item: &Item) {
-    let size = Vec2::splat(42.0);
+fn app_icon(ui: &mut egui::Ui, item: &Item, side: f32) {
+    let size = Vec2::splat(side);
     if let Some(tex) = &item.icon {
-        ui.add(egui::Image::new(tex).fit_to_exact_size(size).corner_radius(CornerRadius::same(8)));
+        ui.add(egui::Image::new(tex).fit_to_exact_size(size).corner_radius(CornerRadius::same(12)));
         return;
     }
     let (rect, _) = ui.allocate_exact_size(size, egui::Sense::hover());
     let hash = item.repo.name.bytes().fold(0usize, |h, b| h.wrapping_mul(31).wrapping_add(b as usize));
-    ui.painter().rect_filled(rect, CornerRadius::same(8), TILE_COLORS[hash % TILE_COLORS.len()]);
+    ui.painter().rect_filled(rect, CornerRadius::same(12), TILE_COLORS[hash % TILE_COLORS.len()]);
     let letter = item.repo.name.chars().next().unwrap_or('?').to_uppercase().to_string();
-    ui.painter().text(rect.center(), Align2::CENTER_CENTER, letter, FontId::proportional(20.0), Color32::WHITE);
+    ui.painter().text(rect.center(), Align2::CENTER_CENTER, letter, FontId::proportional(side * 0.45), Color32::WHITE);
 }
 
 /// A non-clickable, button-sized label.
@@ -861,7 +888,7 @@ fn main() -> eframe::Result {
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
             .with_title("Ambyst-App")
-            .with_inner_size([900.0, 680.0])
+            .with_inner_size([1120.0, 760.0])
             .with_min_inner_size([640.0, 420.0])
             .with_icon(icon),
         ..Default::default()
