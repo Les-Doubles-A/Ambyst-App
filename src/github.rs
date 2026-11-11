@@ -15,6 +15,8 @@ pub struct Repo {
     pub name: String,
     pub description: String,
     pub default_branch: String,
+    /// Date of the last push, used to know when a missing icon is worth a new search.
+    pub pushed_at: String,
 }
 
 #[derive(Clone, Debug)]
@@ -38,6 +40,8 @@ struct ApiRepo {
     name: String,
     description: Option<String>,
     default_branch: String,
+    #[serde(default)]
+    pushed_at: Option<String>,
     #[serde(default)]
     fork: bool,
     #[serde(default)]
@@ -204,6 +208,7 @@ pub fn list_repos(owner: &str) -> Result<Vec<Repo>, String> {
             name: r.name,
             description: r.description.unwrap_or_default(),
             default_branch: r.default_branch,
+            pushed_at: r.pushed_at.unwrap_or_default(),
         }));
         if n < 100 {
             break;
@@ -224,7 +229,31 @@ pub fn repo_info(full_name: &str) -> Result<Repo, String> {
         name: r.name,
         description: r.description.unwrap_or_default(),
         default_branch: r.default_branch,
+        pushed_at: r.pushed_at.unwrap_or_default(),
     })
+}
+
+#[derive(Deserialize)]
+struct ApiTree {
+    tree: Vec<ApiTreeEntry>,
+}
+
+#[derive(Deserialize)]
+struct ApiTreeEntry {
+    path: String,
+    #[serde(rename = "type")]
+    kind: String,
+}
+
+/// Every file path of a branch (ETag cached, so cheap once known).
+pub fn repo_files(full_name: &str, branch: &str) -> Result<Vec<String>, String> {
+    let url = format!("https://api.github.com/repos/{full_name}/git/trees/{branch}?recursive=1");
+    let Fetch::Body(body) = api_get(&url)? else {
+        return Ok(Vec::new());
+    };
+    let tree: ApiTree =
+        serde_json::from_str(&body).map_err(|_| "Réponse GitHub illisible".to_string())?;
+    Ok(tree.tree.into_iter().filter(|e| e.kind == "blob").map(|e| e.path).collect())
 }
 
 /// `Ok(None)` when the repository has no published release.

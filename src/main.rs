@@ -173,6 +173,7 @@ impl App {
                         full_name: extra.clone(),
                         description: String::new(),
                         default_branch: "HEAD".into(),
+                        pushed_at: String::new(),
                     });
                     out.push((repo, true));
                 }
@@ -210,7 +211,7 @@ impl App {
             jobs.push_back(Job::Release(item.repo.full_name.clone()));
         }
         for item in &self.items {
-            if item.icon.is_none() && !icons::recently_missing(&item.repo.full_name) {
+            if item.icon.is_none() && !icons::recently_missing(&item.repo) {
                 jobs.push_back(Job::Icon(item.repo.clone()));
             }
         }
@@ -468,7 +469,7 @@ fn run_jobs(jobs: VecDeque<Job>, tx: Sender<Msg>, ctx: egui::Context) {
                     let _ = tx.send(Msg::Release(full.to_lowercase(), res));
                 }
                 Job::Icon(repo) => {
-                    if let Some(rgba) = icons::fetch(&repo.full_name, &repo.name, &repo.default_branch) {
+                    if let Some(rgba) = icons::fetch(&repo) {
                         let _ = tx.send(Msg::Icon(repo.full_name.to_lowercase(), rgba));
                     }
                 }

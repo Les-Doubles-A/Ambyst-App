@@ -27,7 +27,7 @@ Les apps Android (APK seul) sont listées avec un lien vers leur release.
 
 ## Icônes
 
-Ambyst-App cherche l'icône dans le dépôt (`ambyst-icon.png` en priorité, puis `assets/icon.png`, `<Nom>.png`, `<Nom>.ico`, `icons/icon128.png`...). Sans icône, une tuile avec l'initiale est affichée.
+Ambyst-App cherche l'icône dans le dépôt (`ambyst-icon.png` en priorité, puis `assets/icon.png`, `<Nom>.png`, `<Nom>.ico`, `icons/icon128.png`...). À défaut, il parcourt les fichiers du dépôt et retient l'image qui ressemble le plus à une icône (`icon`, `logo`, `ic_launcher`, nom du dépôt, grande taille). Un dépôt sans icône est revérifié dès qu'il reçoit un nouveau push. Sans icône, une tuile avec l'initiale est affichée.
 
 ## Limite GitHub
 
