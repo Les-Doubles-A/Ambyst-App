@@ -1,0 +1,924 @@
+{
+ "repos": [
+  {
+   "default_branch": "main",
+   "description": "Lanceur minimaliste pour installer et mettre à jour des apps depuis leurs releases GitHub",
+   "full_name": "Les-Doubles-A/Ambyst-App",
+   "images": [
+    "assets/icon-256.png",
+    "assets/icon.ico",
+    "assets/icon.png"
+   ],
+   "name": "Ambyst-App",
+   "pushed_at": "2026-11-14T11:30:17Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/Ambyst-App/releases/download/v1.4.0/Ambyst-App-Setup-1.4.0.exe",
+      "name": "Ambyst-App-Setup-1.4.0.exe",
+      "size": 6361695
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/Ambyst-App/releases/tag/v1.4.0",
+    "tag_name": "v1.4.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application de bureau Windows (PySide6) permettant d'extraire",
+   "full_name": "Les-Doubles-A/AudioVideoTrackExtractor",
+   "images": [
+    "AudioVideoTrackExtractor.ico",
+    "AudioVideoTrackExtractor.png"
+   ],
+   "name": "AudioVideoTrackExtractor",
+   "pushed_at": "2026-11-10T20:46:01Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/AudioVideoTrackExtractor/releases/download/v1.0.0/AudioVideoTrackExtractor-Setup-1.0.0.exe",
+      "name": "AudioVideoTrackExtractor-Setup-1.0.0.exe",
+      "size": 110399857
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/AudioVideoTrackExtractor/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application Windows native ultra-rapide ecrite en Rust (egui/eframe + Win32 + winsqlite3 + winhttp) qui repertorie les executables (.exe) et raccourcis d'applications (.lnk) du PC.",
+   "full_name": "Les-Doubles-A/Bibliotheque",
+   "images": [
+    "bibliotheque.ico",
+    "bibliotheque.png"
+   ],
+   "name": "Bibliotheque",
+   "pushed_at": "2026-11-10T20:46:15Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/Bibliotheque/releases/download/v2.0.0/Bibliotheque-Setup-2.0.0.exe",
+      "name": "Bibliotheque-Setup-2.0.0.exe",
+      "size": 4157914
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/Bibliotheque/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Revue de parties chess.com calculée dans le navigateur : on saisit un pseudo, on choisit une partie, puis Stockfish analyse chaque position. Le site affiche la barre et la courbe d'évaluation, la classification de chaque coup, le meilleur coup et la précision des deux joueurs. La synthèse et l'estimation d'Elo arrivent dans la tranche sui...",
+   "full_name": "Les-Doubles-A/ChessAnalyser",
+   "images": [
+    "installer/ChessAnalyser.ico",
+    "public/favicon.png"
+   ],
+   "name": "ChessAnalyser",
+   "pushed_at": "2026-11-11T10:41:20Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/ChessAnalyser/releases/download/v0.1.1/ChessAnalyser-Setup-0.1.1.exe",
+      "name": "ChessAnalyser-Setup-0.1.1.exe",
+      "size": 3414678
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/ChessAnalyser/releases/tag/v0.1.1",
+    "tag_name": "v0.1.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Extension Manifest V3 (Chrome / Edge / Brave) : nettoyage d'URL + visualiseur de cookies et traqueurs.",
+   "full_name": "Les-Doubles-A/clean-peek",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon32.png",
+    "icons/icon48.png",
+    "installer/clean-peek.ico"
+   ],
+   "name": "clean-peek",
+   "pushed_at": "2026-11-11T10:41:14Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/clean-peek/releases/download/v1.0.1/clean-peek-Setup-1.0.1.exe",
+      "name": "clean-peek-Setup-1.0.1.exe",
+      "size": 2154378
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/clean-peek/releases/tag/v1.0.1",
+    "tag_name": "v1.0.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application Windows qui capte le micro, nettoie et mixe la voix en temps réel avec une latence minimale, puis l'envoie vers un micro virtuel utilisé par Discord, OBS, Teams ou un jeu. Cadrage complet dans product/.",
+   "full_name": "Les-Doubles-A/ClearMic",
+   "images": [
+    "assets/ClearMic.ico",
+    "assets/ClearMic.png"
+   ],
+   "name": "ClearMic",
+   "pushed_at": "2026-11-11T10:41:02Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/ClearMic/releases/download/v0.1.1/ClearMic-Setup-0.1.1.exe",
+      "name": "ClearMic-Setup-0.1.1.exe",
+      "size": 5024235
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/ClearMic/releases/tag/v0.1.1",
+    "tag_name": "v0.1.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Messagerie unifiée personnelle pour Windows et Android : WhatsApp, Instagram, Discord et Google Messages au même endroit, avec un mode incognito et des canaux qui réunissent plusieurs applications. Cadrage complet (besoin, critères d'acceptation, architecture, risques, plan) dans product/.",
+   "full_name": "Les-Doubles-A/ComsALL",
+   "images": [
+    "ComsALL.png",
+    "app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+    "app/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+    "app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+    "app/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+    "app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+    "app/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+    "app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+    "app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+    "app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+    "app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+    "app/assets/logo.png",
+    "app/assets/tray_icon.ico",
+    "app/windows/runner/resources/app_icon.ico"
+   ],
+   "name": "ComsALL",
+   "pushed_at": "2026-11-10T20:46:58Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/ComsALL/releases/download/v1.0.0/ComsALL-1.0.0-windows.zip",
+      "name": "ComsALL-1.0.0-windows.zip",
+      "size": 34474292
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/ComsALL/releases/download/v1.0.0/ComsALL-1.0.0.apk",
+      "name": "ComsALL-1.0.0.apk",
+      "size": 51164169
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/ComsALL/releases/download/v1.0.0/ComsALL-Setup-1.0.0.exe",
+      "name": "ComsALL-Setup-1.0.0.exe",
+      "size": 29442843
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/ComsALL/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "un outil pour convertir ces fichiers",
+   "full_name": "Les-Doubles-A/converter",
+   "images": [
+    "converter.ico"
+   ],
+   "name": "converter",
+   "pushed_at": "2026-11-04T16:30:52Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/converter/releases/download/v2.0.0/FileConverter.exe",
+      "name": "FileConverter.exe",
+      "size": 95728640
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/converter/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Votre mémoire du Web, consultable. DeepFind retrouve une information déjà rencontrée même si vous ne vous souvenez plus du site, du titre ou des mots exacts (« hausse 47 % graphique »).",
+   "full_name": "Les-Doubles-A/deepfind",
+   "images": [
+    "installer/deepfind.ico"
+   ],
+   "name": "deepfind",
+   "pushed_at": "2026-11-10T21:59:23Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/deepfind/releases/download/v1.0.0/deepfind-Setup-1.0.0.exe",
+      "name": "deepfind-Setup-1.0.0.exe",
+      "size": 2109827
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/deepfind/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Comparateur de textes pour Windows, écrit en Rust (eframe/egui pour l'interface, similar pour le diff).",
+   "full_name": "Les-Doubles-A/DiffText",
+   "images": [
+    "assets/DiffText.ico",
+    "assets/DiffText.png"
+   ],
+   "name": "DiffText",
+   "pushed_at": "2026-11-10T20:47:09Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/DiffText/releases/download/v2.0.0/DiffText-Setup-2.0.0.exe",
+      "name": "DiffText-Setup-2.0.0.exe",
+      "size": 4335529
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/DiffText/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "master",
+   "description": "Range tes photos par personne : détection et reconnaissance faciale 100 % locale sous Windows (Rust, YuNet, AuraFace/SFace).",
+   "full_name": "Les-Doubles-A/FaceSort",
+   "images": [
+    "FaceSort.ico",
+    "assets/icon-256.png",
+    "assets/icon-preview.png"
+   ],
+   "name": "FaceSort",
+   "pushed_at": "2026-11-14T13:49:09Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FaceSort/releases/download/v0.1.0/FaceSort-0.1.0-portable.zip",
+      "name": "FaceSort-0.1.0-portable.zip",
+      "size": 311381820
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FaceSort/releases/download/v0.1.0/FaceSort-Setup-0.1.0.exe",
+      "name": "FaceSort-Setup-0.1.0.exe",
+      "size": 298098538
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/FaceSort/releases/tag/v0.1.0",
+    "tag_name": "v0.1.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Extension navigateur : widget d'actualités (Reuters, AP, AFP, BBC, France 24) construit par analyse des pages, sans RSS.",
+   "full_name": "Les-Doubles-A/fil-actu-widget",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon32.png",
+    "icons/icon48.png",
+    "installer/fil-actu-widget.ico"
+   ],
+   "name": "fil-actu-widget",
+   "pushed_at": "2026-11-11T10:41:26Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/fil-actu-widget/releases/download/v1.0.1/fil-actu-widget-Setup-1.0.1.exe",
+      "name": "fil-actu-widget-Setup-1.0.1.exe",
+      "size": 2109116
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/fil-actu-widget/releases/tag/v1.0.1",
+    "tag_name": "v1.0.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application de bureau 100 % locale pour analyser, comprendre et nettoyer un",
+   "full_name": "Les-Doubles-A/FileCleaner",
+   "images": [
+    "assets/FileCleaner.ico",
+    "assets/FileCleaner.png",
+    "legacy_python/icons/FileCleaner.ico",
+    "legacy_python/icons/FileCleaner.png"
+   ],
+   "name": "FileCleaner",
+   "pushed_at": "2026-11-10T20:47:22Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FileCleaner/releases/download/v2.0.0/FileCleaner-Setup-2.0.0.exe",
+      "name": "FileCleaner-Setup-2.0.0.exe",
+      "size": 8222339
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/FileCleaner/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Envoi de fichiers et dossiers en réseau local, Windows et Android. Plan complet : product/. Protocole : docs/protocol.md.",
+   "full_name": "Les-Doubles-A/FileSend",
+   "images": [
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher_monochrome.png",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher_monochrome.png",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png",
+    "windows/app/icons/icon.ico",
+    "windows/app/icons/icon.png"
+   ],
+   "name": "FileSend",
+   "pushed_at": "2026-11-10T20:47:36Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FileSend/releases/download/v0.1.0/FileSend-0.1.0.apk",
+      "name": "FileSend-0.1.0.apk",
+      "size": 29458477
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FileSend/releases/download/v0.1.0/FileSend-Setup-0.1.0.exe",
+      "name": "FileSend-Setup-0.1.0.exe",
+      "size": 3874868
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/FileSend/releases/tag/v0.1.0",
+    "tag_name": "v0.1.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application Windows native ultra-rapide et légère écrite en Rust (tao + wry / WebView2 + API Windows GDI/Registre) qui affiche, filtre et gère les licences de vos polices installées en temps réel.",
+   "full_name": "Les-Doubles-A/FontCheck",
+   "images": [
+    "FontCheck.ico",
+    "FontCheck.png"
+   ],
+   "name": "FontCheck",
+   "pushed_at": "2026-11-10T20:47:47Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FontCheck/releases/download/v1.0.0/FontCheck-Setup-1.0.0.exe",
+      "name": "FontCheck-Setup-1.0.0.exe",
+      "size": 3146146
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FontCheck/releases/download/v1.0.0/FontCheck.exe",
+      "name": "FontCheck.exe",
+      "size": 2536448
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/FontCheck/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application de bureau (Python 3.12) qui analyse des milliers de fichiers de",
+   "full_name": "Les-Doubles-A/FontLicenseClassifier",
+   "images": [
+    "FontCheck_tool/FontCheck.ico",
+    "FontCheck_tool/FontCheck.png",
+    "FontLicenseClassifier.ico",
+    "ambyst-icon.png"
+   ],
+   "name": "FontLicenseClassifier",
+   "pushed_at": "2026-11-11T11:15:43Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/FontLicenseClassifier/releases/download/v1.0.1/FontLicenseClassifier-Setup-1.0.1.exe",
+      "name": "FontLicenseClassifier-Setup-1.0.1.exe",
+      "size": 45192935
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/FontLicenseClassifier/releases/tag/v1.0.1",
+    "tag_name": "v1.0.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Générateur de palettes de couleurs natif ultra-optimisé écrit en Rust avec eframe / egui (accélération matérielle OpenGL). Toutes les fonctionnalités sont visibles simultanément dans une interface fluide à 60 FPS avec sections empilées et défilantes.",
+   "full_name": "Les-Doubles-A/GoldenHue",
+   "images": [
+    "GoldenHue.ico",
+    "GoldenHue.png"
+   ],
+   "name": "GoldenHue",
+   "pushed_at": "2026-11-10T21:26:40Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/GoldenHue/releases/download/v2.2.0/GoldenHue.exe",
+      "name": "GoldenHue.exe",
+      "size": 8178176
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/GoldenHue/releases/download/v2.2.0/GoldenHueSetup-2.2.0.exe",
+      "name": "GoldenHueSetup-2.2.0.exe",
+      "size": 4507657
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/GoldenHue/releases/tag/v2.2.0",
+    "tag_name": "v2.2.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Extension Chrome (Manifest V3) qui ajoute une couche d'actions rapides contextuelles à n'importe quelle page :",
+   "full_name": "Les-Doubles-A/instantaction",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon32.png",
+    "icons/icon48.png",
+    "installer/instantaction.ico"
+   ],
+   "name": "instantaction",
+   "pushed_at": "2026-11-10T21:59:46Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/instantaction/releases/download/v1.0.0/instantaction-Setup-1.0.0.exe",
+      "name": "instantaction-Setup-1.0.0.exe",
+      "size": 2097572
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/instantaction/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Même fonctionnement sur les deux : fil en direct de 70 sources (vérifiées le 07/11/2026), favoris, recherche, filtre par source, gestion des sources. Pas de compte, pas de serveur.",
+   "full_name": "Les-Doubles-A/kiosque",
+   "images": [
+    "desktop/Kiosque.ico",
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon48.png"
+   ],
+   "name": "kiosque",
+   "pushed_at": "2026-11-10T22:30:06Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/kiosque/releases/download/v1.0.0/kiosque-1.0.0.apk",
+      "name": "kiosque-1.0.0.apk",
+      "size": 1452700
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/kiosque/releases/download/v1.0.0/kiosque-Setup-1.0.0.exe",
+      "name": "kiosque-Setup-1.0.0.exe",
+      "size": 5154637
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/kiosque/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Extension navigateur qui ouvre les liens dans une fenêtre flottante déplaçable et redimensionnable, sans nouvel onglet.",
+   "full_name": "Les-Doubles-A/link-peek",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon32.png",
+    "icons/icon48.png",
+    "installer/link-peek.ico"
+   ],
+   "name": "link-peek",
+   "pushed_at": "2026-11-11T10:41:23Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/link-peek/releases/download/v1.5.1/link-peek-Setup-1.5.1.exe",
+      "name": "link-peek-Setup-1.5.1.exe",
+      "size": 2132113
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/link-peek/releases/tag/v1.5.1",
+    "tag_name": "v1.5.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application de bureau pour renommer des fichiers par lot, avec aperçu en temps réel.",
+   "full_name": "Les-Doubles-A/Namify",
+   "images": [
+    "Namify.ico",
+    "Namify.png"
+   ],
+   "name": "Namify",
+   "pushed_at": "2026-11-11T20:39:46Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/Namify/releases/download/v2.0.0/Namify-Setup-2.0.0.exe",
+      "name": "Namify-Setup-2.0.0.exe",
+      "size": 6262290
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/Namify/releases/download/v2.0.0/Namify.exe",
+      "name": "Namify.exe",
+      "size": 13526016
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/Namify/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Tableau de bord de surveillance et d'analyse du réseau local, construit avec",
+   "full_name": "Les-Doubles-A/NetPulse",
+   "images": [
+    "NetPulse.ico"
+   ],
+   "name": "NetPulse",
+   "pushed_at": "2026-11-11T13:08:55Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/NetPulse/releases/download/v2.0.0/NetPulse-2.0.0-portable.exe",
+      "name": "NetPulse-2.0.0-portable.exe",
+      "size": 17323520
+     },
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/NetPulse/releases/download/v2.0.0/NetPulse-Setup-2.0.0.exe",
+      "name": "NetPulse-Setup-2.0.0.exe",
+      "size": 7735501
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/NetPulse/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Outil local pour fusionner, séparer, extraire et optimiser des PDF.",
+   "full_name": "Les-Doubles-A/PDFool",
+   "images": [
+    "Namify.png",
+    "PDFool.ico",
+    "PDFool.png"
+   ],
+   "name": "PDFool",
+   "pushed_at": "2026-11-11T10:29:53Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/PDFool/releases/download/v2.0.0/PDFool-Setup-2.0.0.exe",
+      "name": "PDFool-Setup-2.0.0.exe",
+      "size": 8968517
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/PDFool/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "PodVault est un gestionnaire de podcasts Android 100 % local. Il lit les",
+   "full_name": "Les-Doubles-A/podvault",
+   "images": [
+    "app/src/main/res/drawable/ic_podvault.png"
+   ],
+   "name": "podvault",
+   "pushed_at": "2026-11-10T22:30:28Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/podvault/releases/download/v0.2.0-alpha/podvault-0.2.0-alpha.apk",
+      "name": "podvault-0.2.0-alpha.apk",
+      "size": 25729372
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/podvault/releases/tag/v0.2.0-alpha",
+    "tag_name": "v0.2.0-alpha"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Prompteur professionnel de bureau, écrit en Rust. Éditeur de texte riche,",
+   "full_name": "Les-Doubles-A/Prompto",
+   "images": [
+    "resources/Prompto.ico",
+    "resources/Prompto.png"
+   ],
+   "name": "Prompto",
+   "pushed_at": "2026-11-10T21:27:32Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/Prompto/releases/download/v2.0.0/Prompto-Setup-2.0.0.exe",
+      "name": "Prompto-Setup-2.0.0.exe",
+      "size": 4895250
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/Prompto/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Extension navigateur (Manifest V3) : simulateur de notes, matières, barèmes et coefficients (dont fractions) en temps réel dans PRONOTE.",
+   "full_name": "Les-Doubles-A/pronote-simulateur",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon48.png",
+    "installer/pronote-simulateur.ico"
+   ],
+   "name": "pronote-simulateur",
+   "pushed_at": "2026-11-14T13:49:22Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/pronote-simulateur/releases/download/v1.0.0/pronote-simulateur-Setup-1.0.0.exe",
+      "name": "pronote-simulateur-Setup-1.0.0.exe",
+      "size": 2084166
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/pronote-simulateur/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Générateur de QR Codes de bureau (customtkinter) : création en temps réel à partir de différents types de données.",
+   "full_name": "Les-Doubles-A/QRCoder",
+   "images": [
+    "QRCoder.ico",
+    "QRCoder.png"
+   ],
+   "name": "QRCoder",
+   "pushed_at": "2026-11-10T21:57:54Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/QRCoder/releases/download/v1.0.0/QRCoder-Setup-1.0.0.exe",
+      "name": "QRCoder-Setup-1.0.0.exe",
+      "size": 32777014
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/QRCoder/releases/tag/v1.0.0",
+    "tag_name": "v1.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Réveil Android qui ne s'arrête qu'après avoir répondu juste à des questions : calcul mental et figures de style, avec, pour chaque alarme, le choix des thèmes, du mode (choix multiple ou saisie libre) et du nombre de questions.",
+   "full_name": "Les-Doubles-A/Reveilly",
+   "images": [
+    "android/app/src/main/res/drawable-land-hdpi/splash.png",
+    "android/app/src/main/res/drawable-land-mdpi/splash.png",
+    "android/app/src/main/res/drawable-land-xhdpi/splash.png",
+    "android/app/src/main/res/drawable-land-xxhdpi/splash.png",
+    "android/app/src/main/res/drawable-land-xxxhdpi/splash.png",
+    "android/app/src/main/res/drawable-port-hdpi/splash.png",
+    "android/app/src/main/res/drawable-port-mdpi/splash.png",
+    "android/app/src/main/res/drawable-port-xhdpi/splash.png",
+    "android/app/src/main/res/drawable-port-xxhdpi/splash.png",
+    "android/app/src/main/res/drawable-port-xxxhdpi/splash.png",
+    "android/app/src/main/res/drawable/splash.png",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+    "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+    "public/logo.png"
+   ],
+   "name": "Reveilly",
+   "pushed_at": "2026-11-11T20:39:53Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/Reveilly/releases/download/v1.1.0/Reveilly-1.1.0.apk",
+      "name": "Reveilly-1.1.0.apk",
+      "size": 5066284
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/Reveilly/releases/tag/v1.1.0",
+    "tag_name": "v1.1.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Mini-carte intelligente des longues pages web (Chrome / Chromium, Manifest V3).",
+   "full_name": "Les-Doubles-A/ScrollMap",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon48.png",
+    "installer/ScrollMap.ico"
+   ],
+   "name": "ScrollMap",
+   "pushed_at": "2026-11-10T21:58:19Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/ScrollMap/releases/download/v1.2.0/ScrollMap-Setup-1.2.0.exe",
+      "name": "ScrollMap-Setup-1.2.0.exe",
+      "size": 2082814
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/ScrollMap/releases/tag/v1.2.0",
+    "tag_name": "v1.2.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Page Speed Dial de remplacement pour Vivaldi (desktop) : tes signets en tuiles, depuis les dossiers que tu choisis, avec une personnalisation poussée. Extension Manifest V3, JavaScript sans framework ni serveur. Cadrage complet dans product/.",
+   "full_name": "Les-Doubles-A/speed-dial-vivaldi",
+   "images": [
+    "icons/icon128.png",
+    "icons/icon16.png",
+    "icons/icon32.png",
+    "icons/icon48.png",
+    "installer/speed-dial-vivaldi.ico"
+   ],
+   "name": "speed-dial-vivaldi",
+   "pushed_at": "2026-11-11T10:41:17Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/speed-dial-vivaldi/releases/download/v0.1.1/speed-dial-vivaldi-Setup-0.1.1.exe",
+      "name": "speed-dial-vivaldi-Setup-0.1.1.exe",
+      "size": 2157307
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/speed-dial-vivaldi/releases/tag/v0.1.1",
+    "tag_name": "v0.1.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application de bureau (Python + PySide6) permettant de définir un preset",
+   "full_name": "Les-Doubles-A/StartupPreset",
+   "images": [
+    "StartupPreset.ico",
+    "StartupPreset.png"
+   ],
+   "name": "StartupPreset",
+   "pushed_at": "2026-11-11T10:41:10Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/StartupPreset/releases/download/v1.0.1/StartupPreset-Setup-1.0.1.exe",
+      "name": "StartupPreset-Setup-1.0.1.exe",
+      "size": 47869393
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/StartupPreset/releases/tag/v1.0.1",
+    "tag_name": "v1.0.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Un écran pour écrire. Éditeur de texte sobre et léger pour Windows : une",
+   "full_name": "Les-Doubles-A/swiftpad",
+   "images": [
+    "src-tauri/icons/128x128.png",
+    "src-tauri/icons/128x128@2x.png",
+    "src-tauri/icons/32x32.png",
+    "src-tauri/icons/icon.ico",
+    "src-tauri/icons/icon.png"
+   ],
+   "name": "swiftpad",
+   "pushed_at": "2026-11-10T21:22:15Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/swiftpad/releases/download/v0.1.0/SwiftPad_0.1.0_x64-setup.exe",
+      "name": "SwiftPad_0.1.0_x64-setup.exe",
+      "size": 2202326
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/swiftpad/releases/tag/v0.1.0",
+    "tag_name": "v0.1.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Application de bureau pour traduire des livres entre n'importe quelles langues.",
+   "full_name": "Les-Doubles-A/traducteur_livre",
+   "images": [
+    "assets/icon.ico",
+    "assets/icon.png"
+   ],
+   "name": "traducteur_livre",
+   "pushed_at": "2026-11-10T21:23:57Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/traducteur_livre/releases/download/v0.1.0/traducteur_livre-Setup-0.1.0.exe",
+      "name": "traducteur_livre-Setup-0.1.0.exe",
+      "size": 9105357
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/traducteur_livre/releases/tag/v0.1.0",
+    "tag_name": "v0.1.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Usine automatisée de vidéos courtes d'actualité. Cette phase fournit le socle ; les phases suivantes ajoutent news, fact-check, script, voix, visuels, montage, UI, publication, scheduler, analytics.",
+   "full_name": "Les-Doubles-A/trump-news",
+   "images": [
+    "ambyst-icon.png",
+    "assets/icon.ico",
+    "assets/icon.png"
+   ],
+   "name": "trump-news",
+   "pushed_at": "2026-11-11T11:15:46Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/trump-news/releases/download/v0.8.1/trump-news-Setup-0.8.1.exe",
+      "name": "trump-news-Setup-0.8.1.exe",
+      "size": 9671142
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/trump-news/releases/tag/v0.8.1",
+    "tag_name": "v0.8.1"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Analyse de fichiers 100 % hors ligne, écrite en Rust. Déposez un fichier ou un dossier : l'outil",
+   "full_name": "Les-Doubles-A/UniversalInspector",
+   "images": [
+    "assets/UniversalInspector.ico",
+    "legacy_python/assets/UniversalInspector.ico"
+   ],
+   "name": "UniversalInspector",
+   "pushed_at": "2026-11-10T21:58:46Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/UniversalInspector/releases/download/v2.0.0/UniversalInspector-Setup-2.0.0.exe",
+      "name": "UniversalInspector-Setup-2.0.0.exe",
+      "size": 9326528
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/UniversalInspector/releases/tag/v2.0.0",
+    "tag_name": "v2.0.0"
+   }
+  },
+  {
+   "default_branch": "main",
+   "description": "Extension Manifest V3 qui ajoute un bouton Telecharger sur YouTube (videos, Shorts, playlists)",
+   "full_name": "Les-Doubles-A/YoutubeDownloader",
+   "images": [
+    "extension/icons/icon128.png",
+    "extension/icons/icon16.png",
+    "extension/icons/icon48.png",
+    "youtube.ico"
+   ],
+   "name": "YoutubeDownloader",
+   "pushed_at": "2026-11-11T10:58:40Z",
+   "release": {
+    "assets": [
+     {
+      "browser_download_url": "https://github.com/Les-Doubles-A/YoutubeDownloader/releases/download/v1.2.0/YoutubeDownloader-Setup-1.2.0.exe",
+      "name": "YoutubeDownloader-Setup-1.2.0.exe",
+      "size": 2360487
+     }
+    ],
+    "html_url": "https://github.com/Les-Doubles-A/YoutubeDownloader/releases/tag/v1.2.0",
+    "tag_name": "v1.2.0"
+   }
+  }
+ ],
+ "version": 1
+}
